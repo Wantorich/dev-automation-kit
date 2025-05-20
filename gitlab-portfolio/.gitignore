@@ -1,0 +1,11 @@
+.env
+/result
+/portfolio
+.venv
+__pycache__
+*.log
+*.md
+*.json
+*.csv
+*.jsonl
+*.jsonl.gz
