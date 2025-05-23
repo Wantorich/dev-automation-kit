@@ -97,7 +97,7 @@ def summarize_commits(BASE_URL, HEADERS, batch, index):
         temperature=0.5
     )
     summary = response.choices[0].message.content
-
+    os.makedirs("./result", exist_ok=True)
     filename = f"./result/summary_batch_{index+1}.md"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(summary)
