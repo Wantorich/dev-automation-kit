@@ -18,6 +18,16 @@ GitLab Merge Request(MR) 설명 자동 생성기와 YouTube 자막 다운로드�
 ├── youtube_subtitle_download/   # YouTube 자막 다운로드기 디렉토리
 │   ├── download_subs.py
 │   └── video_urls.txt
+├── portfolio/                    # GitLab 커밋 기반 포트폴리오 생성기
+│   ├── main.py
+│   ├── summarize_portfolio.py
+│   ├── batch_markdown.py
+│   ├── precheck.py
+│   ├── .env
+│   ├── requirements.txt
+│   ├── result/
+│   ├── prompt/
+│   └── portfolio/
 └── README.md                     # 🧾 현재 문서
 ```
 
@@ -45,6 +55,26 @@ GitLab 커밋 메시지와 diff를 기반으로 GPT 모델을 활용하여 MR �
 - 영상 하나당 `.txt` 파일 1개 생성
 
 [👉 상세 사용법 보기](./youtube_subtitle_download/README.md)
+
+---
+
+### 3. 📂 포트폴리오 자동 생성기 (`portfolio/`)
+
+GitLab 프로젝트의 커밋을 기반으로 GPT가 자동으로 **기술 포트폴리오 문서**를 생성합니다.
+
+- GitLab REST API로 커밋 및 diff 수집
+- 커밋을 10개 단위로 분할해 GPT에게 요약 요청
+- `summary_batch_*.md` 파일 생성
+- 요약 결과를 GPT로 다시 입력해 **기술 챕터 단위의 포트폴리오 문서** 생성
+
+```
+- 결과물:
+  - `summary_batch_1.md ~ 10.md`: 커밋 요약
+  - `portfolio.md`: 기술 중심 문서
+  - `portfolio.pdf`: 포맷팅된 출력물 (선택)
+```
+
+[👉 상세 사용법 보기](./gitlab_portfolio/README.md)
 
 ---
 
