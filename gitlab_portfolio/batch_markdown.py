@@ -63,7 +63,9 @@ def get_all_commits(BASE_URL, HEADERS, BRANCH, AUTHOR_NAME):
         batch = resp.json()
         if not batch:
             break
-        all_commits.extend(batch)
+        # Merge 커밋이 아닌 커밋만 필터링
+        filtered_commits = [commit for commit in batch if not commit['title'].startswith('Merge branch')]
+        all_commits.extend(filtered_commits)
         page += 1
         time.sleep(0.1)
     logging.info(f"✅ 총 커밋 수: {len(all_commits)}")
