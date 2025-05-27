@@ -92,6 +92,13 @@ python main.py
 
 ---
 
+## 유의 사항
+
+- result 폴더 밑의 `summary_batch_1.md ~ 10.md`은 새로운 명령어를 실행할때 삭제되므로 적절한 백업하길 권장드립니다.
+- `summary_batch_1.md ~ 10.md`과 prompt 폴더의 `portfolio_summary.txt`를 GPT 홈페이지에서 **심층 리서치** 기능을 활용하면 더욱 풍부한 보고서를 얻을 수 있습니다.
+
+---
+
 ## 🪪 라이센스
 
 이 프로젝트는 MIT 라이선스를 따릅니다.
