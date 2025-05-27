@@ -72,6 +72,8 @@ python main.py
 ```
 
 4. 결과 확인:
+
+- `progress.log` : 현재 진행상황 로그 확인
 - `summary_batch_*.md`: 각 커밋 요약
 - `portfolio.md`, `portfolio.pdf`: 전체 포트폴리오 기술 문서
 
