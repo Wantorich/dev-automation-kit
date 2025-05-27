@@ -58,10 +58,11 @@ OPENAI_API_KEY=sk-...
 
 ```bash
 # 가상환경 생성
-python3 -m venv .venv
+python -m venv .venv
 
 # 가상환경 활성화
-source .venv/bin/activate   # (Windows는 .venv\\Scripts\\activate)
+source .venv\\Scripts\\activate # Window
+source .venv/bin/activate   # not Window
 
 # 필요 패키지 설치
 pip install -r requirements.txt
