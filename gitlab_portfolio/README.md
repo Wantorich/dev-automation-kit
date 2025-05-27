@@ -43,7 +43,7 @@ GPT-4o 모델을 활용하여 커밋 내용을 요약하고, 마크다운 형식
 
 ## 🧪 사용 방법
 
-1. `.env` 파일 생성 및 API Key 설정:
+### `.env` 파일 생성 및 API Key 설정:
 
 ```
 GITLAB_TOKEN=...
@@ -54,7 +54,17 @@ BRANCH=be
 OPENAI_API_KEY=sk-...
 ```
 
-2. 실행 방법
+### GitLab Personal Access Token 발급
+
+-  `https://lab.ssafy.com/-/profile/personal_access_tokens` 접속  
+-  `read_api`, `read_repository` 권한 포함한 토큰 생성  
+
+### project Id 설정
+- gitlab setting -> general -> project ID 확인
+- PROJECT_ID 부분에 값 할당
+
+
+## 실행 방법
 
 ```bash
 # 가상환경 생성
@@ -62,7 +72,7 @@ python -m venv .venv
 
 # 가상환경 활성화
 source .venv\\Scripts\\activate # Window
-source .venv/bin/activate   # not Window
+# source .venv/bin/activate   # not Window
 
 # 필요 패키지 설치
 pip install -r requirements.txt
@@ -71,7 +81,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-4. 결과 확인:
+## 결과 확인
 
 - `progress.log` : 현재 진행상황 로그 확인
 - `summary_batch_*.md`: 각 커밋 요약
@@ -98,6 +108,7 @@ python main.py
 
 - result 폴더 밑의 `summary_batch_1.md ~ 10.md`은 새로운 명령어를 실행할때 삭제되므로 적절한 백업하길 권장드립니다.
 - `summary_batch_1.md ~ 10.md`과 prompt 폴더의 `portfolio_summary.txt`를 GPT 홈페이지에서 **심층 리서치** 기능을 활용하면 더욱 풍부한 보고서를 얻을 수 있습니다.
+- **일반적으로 한번 실행할때 1~2$ 정도의 비용이 청구됩니다.**
 
 ---
 
