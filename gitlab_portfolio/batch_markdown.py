@@ -107,11 +107,15 @@ def summarize_commits(BASE_URL, HEADERS, batch, index):
         temperature=0.5
     )
     summary = response.choices[0].message.content
-    os.makedirs("./result", exist_ok=True)
     
     # 프로젝트 이름 가져오기
     project_name = get_project_name(BASE_URL, HEADERS)
-    filename = f"./result/{project_name}_batch_{index+1}.md"
+    
+    # 프로젝트 이름의 폴더 생성
+    project_dir = f"./result/{project_name}"
+    os.makedirs(project_dir, exist_ok=True)
+    
+    filename = f"{project_dir}/batch_{index+1}.md"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(summary)
 

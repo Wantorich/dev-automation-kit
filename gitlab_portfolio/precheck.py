@@ -37,22 +37,5 @@ def validate_project_exists(BASE_URL, HEADERS):
     return False
 
 def cleanup_result_directory():
-    """
-    result 디렉토리의 모든 파일을 삭제합니다.
-    """
-    result_dir = "./result"
-    if os.path.exists(result_dir):
-        logging.info("🧹 result 디렉토리 정리 중...")
-        for file in glob.glob(os.path.join(result_dir, "*")):
-            try:
-                if os.path.isfile(file):
-                    os.remove(file)
-                    logging.info(f"✅ 파일 삭제 완료: {file}")
-                elif os.path.isdir(file):
-                    shutil.rmtree(file)
-                    logging.info(f"✅ 디렉토리 삭제 완료: {file}")
-            except Exception as e:
-                logging.error(f"❌ 파일 삭제 중 오류 발생: {file} - {str(e)}")
-        logging.info("✨ result 디렉토리 정리 완료")
-    else:
-        logging.info("ℹ️ result 디렉토리가 존재하지 않습니다.")
+    # 이 함수는 더 이상 사용하지 않음
+    pass
