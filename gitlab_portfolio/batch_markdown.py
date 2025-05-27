@@ -78,6 +78,14 @@ def get_diff(BASE_URL, HEADERS, commit_id):
     diffs = [d["diff"] for d in resp.json()]
     return "\n".join(diffs)[:5000]
 
+def get_project_name(BASE_URL, HEADERS):
+    url = f"{BASE_URL}"
+    resp = requests.get(url, headers=HEADERS)
+    resp.raise_for_status()
+    project_name = resp.json()['name']
+    logging.info(f"📋 프로젝트 이름: {project_name}")
+    return project_name
+
 def summarize_commits(BASE_URL, HEADERS, batch, index):
     logging.info(f"🔹 Batch {index+1} 요약 시작")
     with open("./prompt/commit_summary.txt", "r", encoding="utf-8") as pf:
@@ -100,7 +108,10 @@ def summarize_commits(BASE_URL, HEADERS, batch, index):
     )
     summary = response.choices[0].message.content
     os.makedirs("./result", exist_ok=True)
-    filename = f"./result/summary_batch_{index+1}.md"
+    
+    # 프로젝트 이름 가져오기
+    project_name = get_project_name(BASE_URL, HEADERS)
+    filename = f"./result/{project_name}_batch_{index+1}.md"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(summary)
 

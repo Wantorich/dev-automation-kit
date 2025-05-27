@@ -2,11 +2,32 @@ import glob
 import openai
 import logging
 import os
+import requests
+from dotenv import load_dotenv
 
+def get_project_name(BASE_URL, HEADERS):
+    url = f"{BASE_URL}"
+    resp = requests.get(url, headers=HEADERS)
+    resp.raise_for_status()
+    project_name = resp.json()['name']
+    logging.info(f"📋 프로젝트 이름: {project_name}")
+    return project_name
 
 def summarize_portfolio():
+    # 환경 변수 로드
+    load_dotenv()
+    
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     GPT_MODEL_PORTFOLIO = os.getenv("GPT_MODEL_PORTFOLIO", "gpt-4o")
+    GITLAB_TOKEN = os.getenv("GITLAB_TOKEN")
+    GITLAB_HOST = os.getenv("GITLAB_HOST")
+    PROJECT_ID = os.getenv("PROJECT_ID")
+    
+    HEADERS = {"PRIVATE-TOKEN": GITLAB_TOKEN}
+    BASE_URL = f"https://{GITLAB_HOST}/api/v4/projects/{PROJECT_ID}"
+    
+    # 프로젝트 이름 가져오기
+    project_name = get_project_name(BASE_URL, HEADERS)
     
     # result 폴더 내 모든 md 파일 읽기
     md_files = sorted(glob.glob("./result/*.md"))
@@ -34,8 +55,8 @@ def summarize_portfolio():
 
     # 결과 저장
     os.makedirs("./portfolio", exist_ok=True)
-    with open("./portfolio/portfolio_summary.md", "w", encoding="utf-8") as f:
-        f.write("# 전체 포트폴리오 요약\n\n")
+    with open(f"./portfolio/{project_name}_portfolio.md", "w", encoding="utf-8") as f:
+        f.write(f"# {project_name} 포트폴리오\n\n")
         f.write(portfolio_summary)
 
-    logging.info("✅ 전체 포트폴리오 요약 저장 완료: ./portfolio/portfolio_summary.md") 
+    logging.info(f"✅ 전체 포트폴리오 요약 저장 완료: ./portfolio/{project_name}_portfolio.md") 
